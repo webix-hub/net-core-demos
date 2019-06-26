@@ -1,0 +1,20 @@
+﻿@page
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Webix Core - Uploader";
+}
+
+<script>
+    webix.ready(function(){
+        webix.ui({
+            type:"space", rows:[{ 
+                view: "uploader", value: "Select file", 
+                name:"files",
+                link:"mylist",  upload:"/api/attachments"
+            },{
+                view:"list",  id:"mylist", type:"uploader",
+                autoheight:true, borderless:true	
+            }]
+        });
+    });
+</script>

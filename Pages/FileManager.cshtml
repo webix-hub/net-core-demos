@@ -1,0 +1,29 @@
+﻿@page
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Webix Filemanager demo";
+}
+
+@section Headers
+{
+    <script src="//cdn.webix.com/pro/edge/filemanager/filemanager.js"></script>
+    <link rel="stylesheet" type="text/css" href="//cdn.webix.com/pro/edge/filemanager/filemanager.css">
+}
+
+<script>
+    webix.ready(function(){
+        webix.ui({
+            view:"filemanager",
+            url: "/api/files",
+            handlers:{
+                "upload"    : "/api/files/upload",
+                "download"  : "/api/files",
+                "copy"      : "/api/files",
+                "move"      : "/api/files",
+                "remove"    : "/api/files",
+                "rename"    : "/api/files",
+                "create"    : "/api/files"
+            }
+        });
+    });
+</script>

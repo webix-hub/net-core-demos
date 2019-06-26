@@ -1,0 +1,41 @@
+﻿@page
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Webix Core - Form";
+}
+
+<script>
+    webix.ready(function(){
+        webix.ui({
+            type:"space", cols:[{
+                view:"list", id:"l1",
+                template:"#name#",
+                dynamic:true,
+                select:true,
+                url:"/api/persons/dynamic",
+                ready: function(){
+                    this.select(this.getFirstId());
+                },
+                on:{
+                    onAfterSelect:function(id){
+                        $$("f1").setValues(this.getItem(id));
+                    }
+                }
+            }, {
+                view:"form", id:"f1", gravity:2,  rows:[
+                    { view:"button", value:"Save", align:"right", inputWidth:120, css:"webix_primary", click:function(){
+                        const data = this.getFormView().getValues();
+                        $$("l1").updateItem(data.id, data);
+
+                        webix.ajax()
+                            .headers({ "Content-Type":"application/json" })
+                            .put("/api/persons/"+data.id, data);
+                    }},
+                    { view:"text", label:"Name", name:"name"},
+                    { view:"datepicker", label:"Birth Date", name:"birth_date"},
+                    { view:"textarea", label:"Comments", name:"comments"},
+                ]
+            }]
+        });
+    });
+</script>

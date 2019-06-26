@@ -1,0 +1,25 @@
+﻿@page
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Webix Filemanager - dynamic folder loading";
+}
+
+@section Headers
+{
+    <script src="//cdn.webix.com/pro/edge/filemanager/filemanager.js"></script>
+    <link rel="stylesheet" type="text/css" href="//cdn.webix.com/pro/edge/filemanager/filemanager.css">
+}
+
+<script>
+    webix.ready(function(){
+        webix.ui({
+            id:"files",
+            view:"filemanager",
+            handlers:{
+                "branch" : "/api/dynfolders"
+            }
+        });
+
+        $$("files").load("/api/dynfolders");
+    });
+</script>

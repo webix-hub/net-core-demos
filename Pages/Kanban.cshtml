@@ -1,0 +1,49 @@
+﻿@page
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Webix Kanban demo";
+}
+
+@section Headers
+{
+    <script src="//cdn.webix.com/pro/edge/kanban/kanban.js"></script>
+    <link rel="stylesheet" type="text/css" href="//cdn.webix.com/pro/edge/kanban/kanban.css">
+}
+
+<script>
+    webix.ready(function(){
+        webix.ui({
+            rows:[{
+                view:"kanban", id:"kb",
+                cols:[
+                { 
+                    header:"Backlog",
+                    body:{ view:"kanbanlist", status:"new" }
+                },
+                { 
+                    header:"In Progress",
+                    body:{ view:"kanbanlist", status:"work" }
+                },
+                { 
+                    header:"Testing",
+                    body:{ view:"kanbanlist", status:"test" }
+                },
+                { 
+                    header:"Done",
+                    body:{ view:"kanbanlist", status:"done" }
+                }
+                ],
+                editor:true,
+                url: "/api/tasks",
+                save: "rest->/api/tasks"
+            }, {
+                view:"toolbar", padding:{left:10}, cols:[
+                    { view:"button", value:"Add", css:"webix_primary", width: 120, click:function(){
+                        webix.$$("kb").add({ status:"new", text:"" });
+                    }},
+                    {}
+                ]
+            }]
+        });
+    });
+</script>

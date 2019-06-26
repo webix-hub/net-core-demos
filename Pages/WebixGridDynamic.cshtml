@@ -1,0 +1,21 @@
+﻿@page
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Webix Core - Grid with dynamic loading";
+}
+
+<script>
+    webix.ready(function(){
+        webix.ui({
+            type:"space", rows:[{
+                view:"datatable", id:"table",
+                columns:[
+                    { id:"name", header:"Name", width: 200, editor:"text" },
+                    { id:"birth_date", header:"Birth Date", editor:"date", map:"(date)" },
+                    { id:"comments", header:"Comments", fillspace:true, editor:"text" }
+                ],
+                url:"/api/persons/dynamic"
+            }]
+        });
+    });
+</script>

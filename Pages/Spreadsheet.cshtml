@@ -1,0 +1,25 @@
+﻿@page
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Webix Spreadsheet demo";
+}
+
+@section Headers
+{
+    <script src="//cdn.webix.com/pro/edge/spreadsheet/spreadsheet.js"></script>
+    <link rel="stylesheet" type="text/css" href="//cdn.webix.com/pro/edge/spreadsheet/spreadsheet.css">
+}
+
+<script>
+    webix.ready(function(){
+        webix.ui({
+            view:"spreadsheet",
+            toolbar:"full",
+            url: "/api/sheets/1",
+			save: {
+				all:"/api/sheets/1",
+                images: "/api/sheets/1/images"
+			}
+        });
+    });
+</script>

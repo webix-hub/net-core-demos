@@ -1,0 +1,21 @@
+﻿@page
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Webix Scheduler demo";
+}
+
+@section Headers
+{
+    <script src="//cdn.webix.com/pro/edge/scheduler/scheduler.js"></script>
+    <link rel="stylesheet" type="text/css" href="//cdn.webix.com/pro/edge/scheduler/scheduler.css">
+}
+
+<script>
+    webix.ready(function(){
+        webix.ui({
+            view:"scheduler",
+            url: "/api/events",
+			save: "rest->/api/events"
+        });
+    });
+</script>

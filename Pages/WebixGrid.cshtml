@@ -1,0 +1,45 @@
+﻿@page
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Webix Core - Grid";
+}
+
+<script>
+    webix.ready(function(){
+        webix.ui({
+            type:"space", rows:[{
+                view:"toolbar", cols:[
+                    {},
+                    { view:"button", value:"Add", width:120, click:function(){
+                        $$("table").add({ active: false, name:"", birth_date: new Date(), comments:"" });
+                    }}
+                ]    
+            },{
+                scheme:{
+                    $init: function(obj){
+                        if (typeof obj.birth_date == "string")
+                            obj.birth_date = webix.i18n.parseFormatDate(obj.birth_date);
+                    }
+                },
+                view:"datatable", id:"table",
+                columns:[
+                    { id:"active", header:"Is Active", template:"{common.checkbox()}" },
+                    { id:"name", header:"Name", width: 200, editor:"text" },
+                    { id:"birth_date", header:"Birth Date", editor:"date", format:webix.i18n.dateFormatStr },
+                    { id:"comments", header:"Comments", fillspace:true, editor:"text" },
+                    { template:"<span class='webix_icon deleteIcon mdi mdi-delete-forever'></span>", width: 35 }
+                ],
+                onClick:{
+                    "deleteIcon" : function(e, id){
+                        this.remove(id);
+                        return false;
+                    }
+                },
+                editable:true,
+                select:true,
+                url:"/api/persons",
+                save:"json->/api/persons"
+            }]
+        });
+    });
+</script>
