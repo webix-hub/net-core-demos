@@ -181,7 +181,7 @@ namespace Webix.WFS.Local {
 		// Copy makes a copy of file or a folder
 		public string Copy(string source, string target) {
 			if (_logger != null)
-				_logger.LogDebug($"Copy %s to %s", source, target);
+				_logger.LogDebug($"Copy {source} to {target}");
 
 			bool ok = Exists(target);
 			source = idToPath(source);
@@ -222,7 +222,7 @@ namespace Webix.WFS.Local {
 		// Move renames(moves) a file or a folder
 		public string Move(string source, string target) {
 			if (_logger != null)
-				_logger.LogDebug($"Move %s to %s", source, target);
+				_logger.LogDebug($"Move {source} to {target}");
 
 			bool ok = Exists(target);		
 			source = idToPath(source);
